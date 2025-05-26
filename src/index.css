@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@keyframes pulseSlow {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulseSlow {
+  animation: pulseSlow 6s ease-in-out infinite;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+/* optional loader style if not using tailwind spin */
+.loader {
+  border-width: 4px;
+  border-style: solid;
+  border-color: #facc15 transparent transparent transparent;
+  border-radius: 9999px;
+  width: 2.5rem;
+  height: 2.5rem;
+  animation: spin 1s linear infinite;
+}
+
+@layer components {
+  .uiverse-bg {
+    position: absolute;
+    inset: 0; /* ⬅️ This is important: no negative values */
+    width: 100%;
+    height: 100%;
+    --c: 7px;
+    background-color: #000;
+    background-image: radial-gradient(
+        circle at 50% 50%,
+        #0000 1.5px,
+        #000 0 var(--c),
+        #0000 var(--c)
+      ),
+      radial-gradient(
+        circle at 50% 50%,
+        #0000 1.5px,
+        #000 0 var(--c),
+        #0000 var(--c)
+      ),
+      radial-gradient(circle at 50% 50%, #f00, #f000 60%),
+      radial-gradient(circle at 50% 50%, #ff0, #ff00 60%),
+      radial-gradient(circle at 50% 50%, #0f0, #0f00 60%),
+      radial-gradient(ellipse at 50% 50%, #00f, #00f0 60%);
+    background-size: 12px 20.7846px, 12px 20.7846px, 200% 200%, 200% 200%,
+      200% 200%, 200% 20.7846px;
+    background-position: 0px 0px, 6px 10.3923px, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    animation: wee 40s linear infinite, filt 6s linear infinite;
+    overflow: hidden; /* ⬅️ Prevent background from bleeding */
+  }
+
+  @keyframes filt {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+    to {
+      filter: hue-rotate(360deg);
+    }
+  }
+
+  @keyframes wee {
+    0% {
+      background-position: 0px 0px, 6px 10.3923px, 800% 400%, 1000% -400%,
+        -1200% -600%, 400% 41.5692px;
+    }
+    to {
+      background-position: 0px 0px, 6px 10.3923px, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+  }
+}
+
+/* styles.css or your global CSS */
+.container-bg {
+  @apply bg-white/10 backdrop-blur-md shadow-[inset_3px_3px_10px_rgba(0,0,0,1),_-1px_-1px_6px_rgba(255,255,255,0.4)];
+}
