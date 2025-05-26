@@ -11,7 +11,6 @@ function Coin() {
 
   const [coinData, setCoinData] = useState(null);
   const { Currency } = useContext(CoinContext);
-
   const [loadingCoin, setLoadingCoin] = useState(true);
 
   const options = {
@@ -44,7 +43,7 @@ function Coin() {
 
   if (loadingCoin) {
     return (
-      <div className="flex items-center justify-center min-h-screen p-4 mx-2 md:mx-0">
+      <div className="flex items-center justify-center min-h-screen p-4">
         <div className="loader border-r-2 rounded-full border-yellow-500 bg-yellow-300 animate-bounce aspect-square w-8 flex justify-center items-center text-yellow-700">
           $
         </div>
@@ -61,26 +60,30 @@ function Coin() {
   const binanceSymbol = `${coinData.symbol.toUpperCase()}USDT`;
 
   return (
-    <div className="min-h-screen p-4 md:p-10 text-white flex flex-col gap-8">
-      <div className="flex justify-between items-center flex-wrap gap-4">
+    <div className="min-h-screen p-4 sm:p-6 md:p-10 text-white flex flex-col gap-8">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-4">
           <img
             src={coinData.image.large}
             alt={coinData.name}
-            className="w-16 h-16"
+            className="w-14 h-14 sm:w-16 sm:h-16"
           />
           <div>
-            <h1 className="text-3xl font-bold truncate">{coinData.name}</h1>
-            <p className="text-gray-400 uppercase">{coinData.symbol}</p>
+            <h1 className="text-2xl sm:text-3xl font-bold truncate">
+              {coinData.name}
+            </h1>
+            <p className="text-gray-400 uppercase text-sm sm:text-base">
+              {coinData.symbol}
+            </p>
           </div>
         </div>
         <CurrencySelector />
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="bg-white/10 p-6 rounded-xl shadow-md">
-          <h2 className="text-xl font-semibold mb-4">Market Details</h2>
-          <ul className="space-y-2 text-sm md:text-base">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white/10 p-4 sm:p-6 rounded-xl shadow-md">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Market Details</h2>
+          <ul className="space-y-2 text-sm sm:text-base">
             <li className="flex justify-between">
               <span>Market Rank:</span>
               <span className="font-medium">{coinData.market_cap_rank}</span>
@@ -89,18 +92,14 @@ function Coin() {
               <span>Current Price:</span>
               <span className="font-medium">
                 {Currency.symbol}
-                {coinData.market_data.current_price[
-                  Currency.name
-                ].toLocaleString()}
+                {coinData.market_data.current_price[Currency.name].toLocaleString()}
               </span>
             </li>
             <li className="flex justify-between">
               <span>Market Cap:</span>
               <span className="font-medium">
                 {Currency.symbol}
-                {coinData.market_data.market_cap[
-                  Currency.name
-                ].toLocaleString()}
+                {coinData.market_data.market_cap[Currency.name].toLocaleString()}
               </span>
             </li>
             <li className="flex justify-between">
@@ -119,13 +118,14 @@ function Coin() {
             </li>
           </ul>
         </div>
-        <div>
+
+        <div className="bg-white/10 p-4 sm:p-6 rounded-xl shadow-md">
           <TopCoinsPieChart coinId={decodedId} currency={Currency.name} />
         </div>
       </div>
 
-      <div className="bg-white/10 p-6 rounded-xl shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Price History</h2>
+      <div className="bg-white/10 p-4 sm:p-6 rounded-xl shadow-md">
+        <h2 className="text-lg sm:text-xl font-semibold mb-4">Price History</h2>
         <LineChart
           symbol={binanceSymbol}
           name={coinData.name}
