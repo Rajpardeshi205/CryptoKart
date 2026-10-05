@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { CoinContext } from "../../Context/CoinContext";
+import { CoinContext } from "../../Context/Coincontext";
 import { getAuth } from "firebase/auth";
 import {
   getFirestore,
